@@ -20,7 +20,7 @@ const Posts = () => {
 			) : (
 				<>
 					<div className="posts">
-						{posts.data?.map((post) => (
+						{posts.map((post) => (
 							<PostCard post={post} />
 						))}
 					</div>

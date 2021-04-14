@@ -15,13 +15,25 @@ export const PostReducers = (state = initialState, action) => {
 			return {
 				...state,
 				loading: false,
-				posts: action.payload,
+				posts: action.payload.data,
 			};
 		case actions.FETCH_POST_FAILED:
 			return {
 				...state,
 				loading: false,
 				error: action.payload,
+			};
+		case actions.SORT_POSTS_ASC:
+			const sortAsc = state.posts.sort((a, b) => (a.title < b.title ? 1 : a.title > b.title ? -1 : 0));
+			return {
+				...state,
+				posts: sortAsc,
+			};
+		case actions.SORT_POSTS_DESC:
+			const sortDesc = state.posts.sort((a, b) => (a.title < b.title ? -1 : a.title > b.title ? 1 : 0));
+			return {
+				...state,
+				posts: sortDesc,
 			};
 		default:
 			return state;

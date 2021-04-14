@@ -12,3 +12,11 @@ export const fetchPosts = () => async (dispatch) => {
 		console.log(error.message);
 	}
 };
+
+export const sortPostsAsc = () => (dispatch) => {
+	dispatch({ type: actions.SORT_POSTS_ASC });
+};
+
+export const sortPostsDesc = () => (dispatch) => {
+	dispatch({ type: actions.SORT_POSTS_DESC });
+};
