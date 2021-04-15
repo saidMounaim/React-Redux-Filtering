@@ -35,6 +35,14 @@ export const PostReducers = (state = initialState, action) => {
 				...state,
 				posts: sortDesc,
 			};
+		case actions.SEARCH_POSTS:
+			const filterPost = state.posts.filter((post) =>
+				post.title.toLowerCase().includes(action.payload.toLowerCase())
+			);
+			return {
+				...state,
+				posts: filterPost,
+			};
 		default:
 			return state;
 	}

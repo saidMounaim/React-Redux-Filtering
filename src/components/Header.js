@@ -1,19 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { sortPostsAsc, sortPostsDesc } from '../redux/actions/PostActions';
+import { sortPostsAsc, sortPostsDesc, searchPosts, fetchPosts } from '../redux/actions/PostActions';
 
 const Header = () => {
 	const dispatch = useDispatch();
 	const [sort, setSort] = useState('asc');
+	const [search, setSearch] = useState('');
 
 	useEffect(() => {
 		if (sort === 'desc') {
 			dispatch(sortPostsDesc());
 		} else {
 			dispatch(sortPostsAsc());
-			console.log('ee');
 		}
-	}, [sort, dispatch]);
+		if (search === '') {
+			dispatch(fetchPosts());
+		} else {
+			dispatch(searchPosts(search));
+		}
+	}, [search, sort, dispatch]);
 
 	return (
 		<header>
@@ -22,7 +27,12 @@ const Header = () => {
 			</div>
 			<div className="filters">
 				<div className="search">
-					<input type="text" placeholder="Search" />
+					<input
+						type="text"
+						value={search}
+						onChange={(e) => setSearch(e.target.value)}
+						placeholder="Search"
+					/>
 				</div>
 				<div className="sort">
 					<select onChange={(e) => setSort(e.target.value)}>

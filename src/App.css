@@ -106,10 +106,8 @@ header .filters input::placeholder {
 /** END HEADER STYLE **/
 
 .posts {
-	width: 1440px;
-	max-width: 95%;
-	margin: auto;
 	margin-top: 40px;
+	margin-bottom: 80px;
 	display: grid;
 	grid-template-columns: repeat(3, 1fr);
 	grid-gap: 20px;

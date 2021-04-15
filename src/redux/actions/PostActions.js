@@ -20,3 +20,7 @@ export const sortPostsAsc = () => (dispatch) => {
 export const sortPostsDesc = () => (dispatch) => {
 	dispatch({ type: actions.SORT_POSTS_DESC });
 };
+
+export const searchPosts = (query) => (dispatch) => {
+	dispatch({ type: actions.SEARCH_POSTS, payload: query });
+};

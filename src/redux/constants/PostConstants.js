@@ -4,3 +4,5 @@ export const FETCH_POST_FAILED = 'FETCH_POST_FAILED';
 
 export const SORT_POSTS_ASC = 'SORT_POSTS_ASC';
 export const SORT_POSTS_DESC = 'SORT_POSTS_DESC';
+
+export const SEARCH_POSTS = 'SEARCH_POSTS';
