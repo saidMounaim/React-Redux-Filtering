@@ -13,14 +13,17 @@ export const fetchPosts = () => async (dispatch) => {
 	}
 };
 
-export const sortPostsAsc = () => (dispatch) => {
-	dispatch({ type: actions.SORT_POSTS_ASC });
+export const sortPostsAsc = () => (dispatch, getState) => {
+	const { PostReducers } = getState();
+	dispatch({ type: actions.SORT_POSTS_ASC, payload: PostReducers.posts });
 };
 
-export const sortPostsDesc = () => (dispatch) => {
-	dispatch({ type: actions.SORT_POSTS_DESC });
+export const sortPostsDesc = () => (dispatch, getState) => {
+	const { PostReducers } = getState();
+	dispatch({ type: actions.SORT_POSTS_DESC, payload: PostReducers.posts });
 };
 
 export const searchPosts = (query) => (dispatch) => {
+	console.log('eee');
 	dispatch({ type: actions.SEARCH_POSTS, payload: query });
 };

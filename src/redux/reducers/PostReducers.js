@@ -2,6 +2,7 @@ import * as actions from '../constants/PostConstants';
 
 const initialState = {
 	posts: [],
+	searchResults: [],
 };
 
 export const PostReducers = (state = initialState, action) => {
@@ -16,6 +17,7 @@ export const PostReducers = (state = initialState, action) => {
 				...state,
 				loading: false,
 				posts: action.payload.data,
+				searchResults: action.payload.data,
 			};
 		case actions.FETCH_POST_FAILED:
 			return {
@@ -24,24 +26,23 @@ export const PostReducers = (state = initialState, action) => {
 				error: action.payload,
 			};
 		case actions.SORT_POSTS_ASC:
-			const sortAsc = state.posts.sort((a, b) => (a.title < b.title ? 1 : a.title > b.title ? -1 : 0));
+			const sortAsc = action.payload.sort((a, b) => (a.title < b.title ? 1 : a.title > b.title ? -1 : 0));
 			return {
 				...state,
 				posts: sortAsc,
 			};
 		case actions.SORT_POSTS_DESC:
-			const sortDesc = state.posts.sort((a, b) => (a.title < b.title ? -1 : a.title > b.title ? 1 : 0));
+			const sortDesc = action.payload.sort((a, b) => (a.title < b.title ? -1 : a.title > b.title ? 1 : 0));
 			return {
 				...state,
 				posts: sortDesc,
 			};
 		case actions.SEARCH_POSTS:
-			const filterPost = state.posts.filter((post) =>
-				post.title.toLowerCase().includes(action.payload.toLowerCase())
-			);
 			return {
 				...state,
-				posts: filterPost,
+				posts: state.searchResults.filter((post) =>
+					post.title.toLowerCase().includes(action.payload.toLowerCase())
+				),
 			};
 		default:
 			return state;

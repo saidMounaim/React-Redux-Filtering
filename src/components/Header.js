@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { sortPostsAsc, sortPostsDesc, searchPosts, fetchPosts } from '../redux/actions/PostActions';
+import { sortPostsAsc, sortPostsDesc, searchPosts } from '../redux/actions/PostActions';
 
 const Header = () => {
 	const dispatch = useDispatch();
@@ -8,15 +8,12 @@ const Header = () => {
 	const [search, setSearch] = useState('');
 
 	useEffect(() => {
+		dispatch(searchPosts(search));
 		if (sort === 'desc') {
 			dispatch(sortPostsDesc());
-		} else {
-			dispatch(sortPostsAsc());
 		}
-		if (search === '') {
-			dispatch(fetchPosts());
-		} else {
-			dispatch(searchPosts(search));
+		if (sort === 'asc') {
+			dispatch(sortPostsAsc());
 		}
 	}, [search, sort, dispatch]);
 

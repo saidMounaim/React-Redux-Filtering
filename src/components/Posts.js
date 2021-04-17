@@ -3,6 +3,7 @@ import PostCard from './PostCard';
 import Loader from './Loader';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchPosts } from '../redux/actions/PostActions';
+import Paginate from './Paginate';
 
 const Posts = () => {
 	const dispatch = useDispatch();
@@ -17,9 +18,9 @@ const Posts = () => {
 	const postPerPage = 15;
 	const totalPosts = posts.length;
 
-	const totalPages = Math.ceil(totalPosts / postPerPage);
-
-	console.log(totalPages);
+	const indexOfLastPost = currentPage * postPerPage;
+	const indexOfFirstPost = indexOfLastPost - postPerPage;
+	const filterPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
 
 	return (
 		<>
@@ -28,25 +29,18 @@ const Posts = () => {
 			) : (
 				<div className="container">
 					<div className="posts">
-						{posts.map((post) => (
+						{filterPosts.map((post) => (
 							<PostCard post={post} />
 						))}
 					</div>
-					<ul class="pagination">
-						<li class="page-item disabled">
-							<button class="page-link" href="#">
-								&laquo;
-							</button>
-						</li>
-						<li class="page-item active">
-							<button class="page-link" href="#">
-								1
-							</button>
-						</li>
-						<li class="page-item">
-							<button class="page-link">&raquo;</button>
-						</li>
-					</ul>
+					{totalPosts > postPerPage && (
+						<Paginate
+							currentPage={currentPage}
+							setCurrentPage={setCurrentPage}
+							totalPosts={totalPosts}
+							postPerPage={postPerPage}
+						/>
+					)}
 				</div>
 			)}
 		</>
