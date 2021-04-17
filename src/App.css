@@ -129,3 +129,15 @@ header .filters input::placeholder {
 }
 
 /** END POSTS STYLE **/
+
+@media screen and (max-width: 768px) {
+	.posts {
+		grid-template-columns: repeat(2, 1fr);
+	}
+}
+
+@media screen and (max-width: 500px) {
+	.posts {
+		grid-template-columns: repeat(1, 1fr);
+	}
+}
