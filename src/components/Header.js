@@ -2,10 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { sortPostsAsc, sortPostsDesc, searchPosts } from '../redux/actions/PostActions';
 
-const Header = () => {
+const Header = ({ search, setSearch, onChange }) => {
 	const dispatch = useDispatch();
 	const [sort, setSort] = useState('asc');
-	const [search, setSearch] = useState('');
 
 	useEffect(() => {
 		dispatch(searchPosts(search));
@@ -27,7 +26,7 @@ const Header = () => {
 					<input
 						type="text"
 						value={search}
-						onChange={(e) => setSearch(e.target.value)}
+						onChange={onChange}
 						placeholder="Search"
 					/>
 				</div>

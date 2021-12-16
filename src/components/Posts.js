@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Header from './Header';
 import PostCard from './PostCard';
 import Loader from './Loader';
 import { useDispatch, useSelector } from 'react-redux';
@@ -6,10 +7,18 @@ import { fetchPosts } from '../redux/actions/PostActions';
 import Paginate from './Paginate';
 
 const Posts = () => {
+
+	const [search, setSearch] = useState('');
 	const dispatch = useDispatch();
+	const { posts, loading } = useSelector((state) => state.PostReducers);
 	const [currentPage, setCurrentPage] = useState(1);
 
-	const { posts, loading } = useSelector((state) => state.PostReducers);
+	const handleChangeSearch = (e) => {
+		if(e.target.value.length > 0) {
+			setCurrentPage(1);
+		}
+		setSearch(e.target.value);
+	}
 
 	useEffect(() => {
 		dispatch(fetchPosts());
@@ -24,6 +33,7 @@ const Posts = () => {
 
 	return (
 		<>
+			<Header search={search} setSearch={setSearch} onChange={handleChangeSearch} />
 			{loading ? (
 				<Loader />
 			) : (

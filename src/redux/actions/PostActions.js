@@ -23,7 +23,11 @@ export const sortPostsDesc = () => (dispatch, getState) => {
 	dispatch({ type: actions.SORT_POSTS_DESC, payload: PostReducers.posts });
 };
 
-export const searchPosts = (query) => (dispatch) => {
-	console.log('eee');
-	dispatch({ type: actions.SEARCH_POSTS, payload: query });
+export const searchPosts = (query) => (dispatch, getState) => {
+	console.log(query);
+	const { PostReducers } = getState();
+	const searchResults =  PostReducers.searchResults.filter((post) => 
+		post.title.toLowerCase().includes(query.toLowerCase())
+	);
+	dispatch({ type: actions.SEARCH_POSTS, payload: searchResults });
 };

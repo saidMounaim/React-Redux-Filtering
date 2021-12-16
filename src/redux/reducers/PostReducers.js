@@ -3,6 +3,7 @@ import * as actions from '../constants/PostConstants';
 const initialState = {
 	posts: [],
 	searchResults: [],
+	page: 1,
 };
 
 export const PostReducers = (state = initialState, action) => {
@@ -40,9 +41,8 @@ export const PostReducers = (state = initialState, action) => {
 		case actions.SEARCH_POSTS:
 			return {
 				...state,
-				posts: state.searchResults.filter((post) =>
-					post.title.toLowerCase().includes(action.payload.toLowerCase())
-				),
+				posts: action.payload,
+				page: 1
 			};
 		default:
 			return state;
